@@ -13,11 +13,11 @@
     "chat-app"
   ],
   "author": "Dnyaensh Kalbhut",
-  "license": "ISC",{
+  "license": "ISC",
   "dependencies": {
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "nodemon": "^3.0.2"
   }
 }
-}
+
