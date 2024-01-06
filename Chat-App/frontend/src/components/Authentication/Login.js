@@ -49,6 +49,17 @@ const submitHandler = ()=>{};
       >
         Login
       </Button>
+      <Button
+      colorScheme='red'
+      variant={"solid"}
+      width='100%'
+      onClick={()=>{
+        setEmail("guest@example.com");
+        setPassword("123456567")
+      }}
+      >
+        Get User Credential
+      </Button>
     </VStack>
   )
 }
