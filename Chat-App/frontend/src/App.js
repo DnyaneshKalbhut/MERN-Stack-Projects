@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom/cjs/react-router-dom';
 import './App.css';
 
 import Homepage from './Pages/Homepage';
-import ChatPage from './Pages/ChatPage';
+import ChatPage from './Pages/Chatpage';
 
 function App() {
   return (
