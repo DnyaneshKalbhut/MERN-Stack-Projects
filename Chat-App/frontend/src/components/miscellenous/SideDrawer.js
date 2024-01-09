@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { ChatState } from '../../context/ChatProvider';
-import { Box, Tooltip,Text, Button, Menu, MenuButton, MenuList, MenuItem, Avatar, MenuDivider, Drawer, useDisclosure, DrawerOverlay, DrawerHeader, DrawerContent, DrawerBody, Input,  useToast } from '@chakra-ui/react';
+import { Box, Tooltip,Text, Button, Menu, MenuButton, MenuList, MenuItem, Avatar, MenuDivider, Drawer, useDisclosure, DrawerOverlay, DrawerHeader, DrawerContent, DrawerBody, Input,  useToast, Spinner } from '@chakra-ui/react';
 import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import ProfileModel from './ProfileModal';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
@@ -15,7 +15,7 @@ const SideDrawer = () => {
   const [loadingChat, setLoadingChat] = useState(false);
      const {isOpen,onOpen,onClose} =useDisclosure();  
    const history = useHistory(); 
-  const {user}=ChatState();
+  const {user,setSelectedChat,chats,setChats}=ChatState();
   const logoutHandler = () => {
     localStorage.removeItem("userInfo");
     history.push("/");
@@ -59,8 +59,31 @@ const SideDrawer = () => {
 
   }
 
-  const accesChat=(userId)=>{
+  const accesChat=async (userId)=>{
+      try {
+        setLoadingChat(true)
 
+        const config = {
+            headers:{
+                "Content-type":"application/json",
+                Authorization:`Bearer ${user.token}`,
+            }
+        }
+
+        const data = await  axios.post("/api/chat",{userId},config);
+        setSelectedChat(data)
+            setLoadingChat(false);
+            onclose();
+      } catch (error) {
+        toast({
+            title: "Error fetching the chat",
+            description: error.message,
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+            position: "bottom-left",
+          });
+      }
   }
   return (
     
@@ -131,6 +154,7 @@ const SideDrawer = () => {
                    />  
                 })
             )}
+            {loadingChat && <Spinner ml={"auto"} display={'flex'}/>}
         </DrawerBody>
         </DrawerContent>
 
