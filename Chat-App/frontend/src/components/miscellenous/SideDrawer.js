@@ -35,7 +35,7 @@ const SideDrawer = () => {
     }
 
     try {
-        setLoading=(true);
+        setLoading(true);
         const config={
             headers:{
                 Authorization:`Bearer ${user.token}`,
@@ -43,7 +43,7 @@ const SideDrawer = () => {
         }
         const {data} =await axios.get(`/api/user?search=${search}`,config)
 
-        setLoading=(false);
+        setLoading(false);
         setSearchResult(data);
     } catch (error) {
         toast({
@@ -71,9 +71,11 @@ const SideDrawer = () => {
         }
 
         const data = await  axios.post("/api/chat",{userId},config);
-        setSelectedChat(data)
+
+            if (!chats.find((c)=> c._id === data._id )) setChats([data,...chats]) 
+            setSelectedChat(data)
             setLoadingChat(false);
-            onclose();
+            onClose();
       } catch (error) {
         toast({
             title: "Error fetching the chat",
@@ -133,6 +135,7 @@ const SideDrawer = () => {
         <DrawerBody>
             <Box display={"flex"} pb={2} >
              <Input 
+             id='searchInput'
              placeholder='Search by name or email'
              mr={2}
              value={search}
@@ -145,16 +148,17 @@ const SideDrawer = () => {
             {loading ? (
                 <ChatLoading/>
             ):(
-                searchResult?.map(user=>{
+                searchResult?.map(user=>(
                    <UserListItem 
                    key=
                    {user._id}
                    user={user}
                    handleFunction={()=>accesChat(user._id)}
                    />  
-                })
+                ))
             )}
             {loadingChat && <Spinner ml={"auto"} display={'flex'}/>}
+            
         </DrawerBody>
         </DrawerContent>
 
