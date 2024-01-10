@@ -5,6 +5,7 @@ import axios from 'axios';
 import { AddIcon } from '@chakra-ui/icons';
 import ChatLoading from './ChatLoading';
 import { getSender } from '../config/ChatLogics';
+import GroupChatModal from './miscellenous/GroupChatModal';
 
 const MyChats = () => {
    const [loggedUser,setLoggedUser]=useState();
@@ -62,6 +63,7 @@ const MyChats = () => {
      alignItems={"center"}
     >
     My Chats
+    <GroupChatModal>
     <Button
     display={"flex"}
     fontSize={{base:"17px",md:"10px",lg:"17px"}}
@@ -69,6 +71,7 @@ const MyChats = () => {
     >
     New Group Chat
     </Button>
+    </GroupChatModal>
     </Box>
     <Box
     display={"flex"}
@@ -80,28 +83,28 @@ const MyChats = () => {
     borderRadius={"lg"}
     overflowY={"hidden"}
     >
-     {chats?(
-      <Stack>
-        {chats.map((chat)=>{
-          <Box
-          onClick={()=> setSelectedChat(chat)}
-          cursor={"pointer"}
-          bg={selectedChat === chat ? "#3882AC":"#E8E8E8"}
-          color={selectedChat === chat ? "white" : "black"}
-          px={3}
-          py={2}
-          borderRadius={"1g"}
-          key={chat._id}
-          >
-          <Text>
-            {!chat.isGroupChat? getSender(loggedUser,chat.users):chat.chatName}
-          </Text>
-          </Box>
-        })}
-      </Stack>
-     ):(
-      <ChatLoading />
-     )}
+    {chats ? (
+  <Stack>
+    {chats.map((chat) => (
+      <Box
+        onClick={() => setSelectedChat(chat)}
+        cursor={"pointer"}
+        bg={selectedChat === chat ? "#3882AC" : "#E8E8E8"}
+        color={selectedChat === chat ? "white" : "black"}
+        px={3}
+        py={2}
+        borderRadius={"1g"}
+        key={chat._id}
+      >
+        <Text>
+          {!chat.isGroupChat ? getSender(loggedUser, chat.users) : chat.chatName}
+        </Text>
+      </Box>
+    ))}
+  </Stack>
+) : (
+  <ChatLoading />
+)}
     </Box>
     </Box>
   )
