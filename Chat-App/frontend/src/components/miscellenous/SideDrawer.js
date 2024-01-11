@@ -136,6 +136,7 @@ const SideDrawer = () => {
             <Box display={"flex"} pb={2} >
              <Input 
              id='searchInput'
+             aria-label="Search by name or email"
              placeholder='Search by name or email'
              mr={2}
              value={search}

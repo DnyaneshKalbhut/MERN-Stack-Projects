@@ -9,7 +9,6 @@ const UserBadgeItem = ({user,handleFunction}) => {
  py={1}
  borderRadius={"1g"}
  m={1}
- 
  mb={2}
  variant="solid"
  fontSize={12}

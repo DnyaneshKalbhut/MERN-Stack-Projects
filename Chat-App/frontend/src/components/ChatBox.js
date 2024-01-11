@@ -6,8 +6,9 @@ import SingleChat from './SingleChat'
 const ChatBox = ({fetchagain ,setFetchAgain}) => {
 
   const {selectedChat}= ChatState()
-  return <Box
-  d={{ base: selectedChat ? "flex" : "none", md: "flex" }}
+  return (
+  <Box
+  display={{ base: selectedChat ? "flex" : "none", md: "flex" }}
   alignItems="center"
   flexDir="column"
   p={3}
@@ -18,6 +19,7 @@ const ChatBox = ({fetchagain ,setFetchAgain}) => {
   >
    <SingleChat fetchagain={fetchagain} setFetchAgain={setFetchAgain}/>
   </Box>
+  )
 }
 
 export default ChatBox

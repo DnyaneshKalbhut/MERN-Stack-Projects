@@ -158,19 +158,16 @@ setSelectedUsers([...selectedUsers,userToAdd]);
             ))}
           </Box>
           {loading ? (
-            // <ChatLoading />
-            <div>Loading...</div>
-          ) : (
-            searchResult
-              ?.slice(0, 4)
-              .map((user) => (
-                <UserListItem
-                  key={user._id}
-                  user={user}
-                  handleFunction={() => handleGroup(user)}
-                />
-              ))
-          )}
+  <div>Loading...</div>
+) : (
+  Array.isArray(searchResult) && searchResult.slice(0, 4).map((user) => (
+    <UserListItem
+      key={user._id}
+      user={user}
+      handleFunction={() => handleGroup(user)}
+    />
+  ))
+)}
         </ModalBody>
         <ModalFooter>
           <Button onClick={handleSubmit} colorScheme="blue">

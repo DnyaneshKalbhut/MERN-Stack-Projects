@@ -83,7 +83,7 @@ const MyChats = ({fetchAgain}) => {
     borderRadius={"lg"}
     overflowY={"hidden"}
     >
-    {chats ? (
+   {chats ? (
   <Stack>
     {chats.map((chat) => (
       <Box
