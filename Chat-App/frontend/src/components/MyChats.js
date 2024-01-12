@@ -84,7 +84,7 @@ const MyChats = ({fetchAgain}) => {
     overflowY={"hidden"}
     >
    {chats ? (
-  <Stack>
+  <Stack overflowY={"scroll"}>
     {chats.map((chat) => (
       <Box
         onClick={() => setSelectedChat(chat)}
@@ -99,7 +99,15 @@ const MyChats = ({fetchAgain}) => {
         <Text>
           {!chat.isGroupChat ? getSender(loggedUser, chat.users) : chat.chatName}
         </Text>
-      </Box>
+        {chat.latestMessage && (
+                  <Text fontSize="xs">
+                    <b>{chat.latestMessage.sender.name} : </b>
+                    {chat.latestMessage.content.length > 50
+                      ? chat.latestMessage.content.substring(0, 51) + "..."
+                      : chat.latestMessage.content}
+                  </Text>
+                )}
+              </Box>
     ))}
   </Stack>
 ) : (
