@@ -11,6 +11,7 @@ const MyChats = ({fetchAgain}) => {
    const [loggedUser,setLoggedUser]=useState();
   const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
   const toast= useToast()
+
   const fetchChats = async () => {
     // console.log(user._id);
     try {
@@ -39,7 +40,9 @@ const MyChats = ({fetchAgain}) => {
     fetchChats();
     // eslint-disable-next-line
   }, [fetchAgain]);
-
+  useEffect(() => {
+    console.log('Selected Chat:', selectedChat);
+  }, [selectedChat]);
 
   return (
     <Box
@@ -87,13 +90,15 @@ const MyChats = ({fetchAgain}) => {
   <Stack overflowY={"scroll"}>
     {chats.map((chat) => (
       <Box
-        onClick={() => setSelectedChat(chat)}
+        onClick={() => {  console.log("Before update: ", selectedChat);
+        setSelectedChat(chat);
+        console.log("After update: ", selectedChat);}}
         cursor={"pointer"}
         bg={selectedChat === chat ? "#3882AC" : "#E8E8E8"}
         color={selectedChat === chat ? "white" : "black"}
         px={3}
         py={2}
-        borderRadius={"1g"}
+        borderRadius={1}
         key={chat._id}
       >
         <Text>
