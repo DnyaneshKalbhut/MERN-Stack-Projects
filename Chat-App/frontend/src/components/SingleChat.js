@@ -41,6 +41,19 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               </>
             )}
           </Text>
+          <Box
+          display={"flex"}
+          flexDir="column"
+          justifyContent="flex-end"
+          p={1}
+          bg="#E8E8E8"
+          w="100%"
+          h="100%"
+          borderRadius="1g"
+          overflowY="hidden"
+          >
+            {/* Message here */}
+          </Box>
         </>
       ) : (
         <Box
